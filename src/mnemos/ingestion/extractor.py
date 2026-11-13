@@ -110,6 +110,27 @@ class MemoryExtractor:
             "tool",
             False,
         ),
+        (
+            re.compile(r"(?:(?:The|Dr\.?|Prof\.?)\s+)?([A-Z][a-zA-Z0-9_]*(?:\s+[a-zA-Z0-9_]+)*?)\s+(?i:leads|supervises|manages|directs|heads)\s+(?:the\s+)?([A-Z][a-zA-Z0-9_]*(?:\s+[a-zA-Z0-9_]+)*)"),
+            "leads",
+            "person",
+            "organization",
+            False,
+        ),
+        (
+            re.compile(r"(?:(?:The|Dr\.?|Prof\.?)\s+)?([A-Z][a-zA-Z0-9_]*(?:\s+[a-zA-Z0-9_]+)*?)\s+(?i:maintains|operates|oversees)\s+(?:the\s+)?([A-Z][a-zA-Z0-9_]*(?:\s+[a-zA-Z0-9_]+)*)"),
+            "maintains",
+            "organization",
+            "concept",
+            False,
+        ),
+        (
+            re.compile(r"(?:(?:The|Dr\.?|Prof\.?)\s+)?([A-Z][a-zA-Z0-9_]*(?:\s+[a-zA-Z0-9_]+)*?)\s+(?i:feeds into|feeds real-time telemetry into|depends on|relies on|connects to|routes to|publishes to|streams into|stores in|stores records in|stores transactions in|stores profiles in|provides predictive forecasting for)\s+(?:the\s+)?([A-Z][a-zA-Z0-9_]*(?:\s+[a-zA-Z0-9_]+)*)"),
+            "depends_on",
+            "concept",
+            "concept",
+            False,
+        ),
     ]
 
     @classmethod
@@ -215,11 +236,24 @@ class MemoryExtractor:
                             )
                         )
 
-        # Fallback: Named Entity recognition heuristic for capitalized terms if none found
+        # Fallback: Named Entity recognition heuristic for capitalized phrases and terms
         if not entities:
+            # 1. Match multi-word capitalized names optionally prefixed by Dr./Prof./Mr./Ms.
+            phrase_matches = re.findall(r"\b(?:(?:Dr|Prof|Mr|Ms)\.?\s+)?([A-Z][a-zA-Z0-9_]+(?:\s+[A-Z][a-zA-Z0-9_]+)+)\b", text)
+            stop_phrases = {"what is", "which is", "who is", "the company", "core infrastructure"}
+            for phrase in phrase_matches:
+                clean_p = phrase.strip()
+                if clean_p.lower() not in stop_phrases:
+                    entities[clean_p.lower()] = ExtractedEntity(name=clean_p, entity_type="concept")
+
+            # 2. Match single capitalized terms
             cap_words = re.findall(r"\b[A-Z][a-zA-Z0-9_]{2,}\b", text)
+            stop_words = {
+                "the", "this", "that", "there", "then", "when", "where", "what", "how",
+                "which", "who", "why", "does", "did", "was", "were", "are", "have", "has"
+            }
             for word in cap_words:
-                if word.lower() not in {"the", "this", "that", "there", "then", "when", "where", "what", "how"}:
+                if word.lower() not in stop_words and word.lower() not in entities:
                     entities[word.lower()] = ExtractedEntity(name=word, entity_type="concept")
 
         return list(entities.values()), facts

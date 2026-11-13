@@ -69,6 +69,15 @@ async def init_db() -> None:
         await conn.execute(text('CREATE EXTENSION IF NOT EXISTS "pg_trgm";'))
         await conn.execute(text('CREATE EXTENSION IF NOT EXISTS "btree_gist";'))
         await conn.run_sync(Base.metadata.create_all)
+        # Ensure HNSW vector index and FTS GIN index exist
+        await conn.execute(text(
+            "CREATE INDEX IF NOT EXISTS ix_memory_embeddings_vector_hnsw "
+            "ON memory_embeddings USING hnsw (embedding vector_cosine_ops);"
+        ))
+        await conn.execute(text(
+            "CREATE INDEX IF NOT EXISTS ix_memories_fts "
+            "ON memories USING gin(to_tsvector('english', normalized_content));"
+        ))
 
     from mnemos.core.security import hash_api_key
     from mnemos.db.models import APIKey, Tenant

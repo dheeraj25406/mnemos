@@ -30,6 +30,8 @@ class MockEmbeddingProvider(BaseEmbeddingProvider):
 
     def __init__(self, dimension: int = 384):
         self._dim = dimension
+        self._query_cache: dict[str, list[float]] = {}
+        self._cache_max_size = 2048
 
     @property
     def dimension(self) -> int:
@@ -49,7 +51,15 @@ class MockEmbeddingProvider(BaseEmbeddingProvider):
         return [self._embed_single(t) for t in texts]
 
     def embed_query(self, text: str) -> list[float]:
-        return self._embed_single(text)
+        clean = text.strip()
+        if clean in self._query_cache:
+            return self._query_cache[clean]
+        vec = self._embed_single(clean)
+        if len(self._query_cache) >= self._cache_max_size:
+            for k in list(self._query_cache.keys())[:256]:
+                del self._query_cache[k]
+        self._query_cache[clean] = vec
+        return vec
 
 
 class FastEmbedProvider(BaseEmbeddingProvider):
@@ -59,6 +69,8 @@ class FastEmbedProvider(BaseEmbeddingProvider):
         from fastembed import TextEmbedding
         self._model = TextEmbedding(model_name=model_name)
         self._dim = dimension
+        self._query_cache: dict[str, list[float]] = {}
+        self._cache_max_size = 2048
 
     @property
     def dimension(self) -> int:
@@ -71,8 +83,16 @@ class FastEmbedProvider(BaseEmbeddingProvider):
         return [e.tolist() for e in embeddings]
 
     def embed_query(self, text: str) -> list[float]:
-        embeddings = list(self._model.embed([text]))
-        return embeddings[0].tolist()
+        clean = text.strip()
+        if clean in self._query_cache:
+            return self._query_cache[clean]
+        embeddings = list(self._model.embed([clean]))
+        vec = embeddings[0].tolist()
+        if len(self._query_cache) >= self._cache_max_size:
+            for k in list(self._query_cache.keys())[:256]:
+                del self._query_cache[k]
+        self._query_cache[clean] = vec
+        return vec
 
 
 _provider_instance: BaseEmbeddingProvider | None = None

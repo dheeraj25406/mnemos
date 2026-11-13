@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from pydantic import BaseModel, Field
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from mnemos.core.logging import logger
@@ -118,35 +118,43 @@ class HybridRetrievalEngine:
         # 4. Knowledge Graph Channel (Entity-centered multi-hop expansion)
         if request.enable_graph:
             extracted_ents, _ = MemoryExtractor.extract(request.query)
-            for e in extracted_ents:
-                evidence_entities.append(e.name)
-                # Find matching entity in DB
+            if extracted_ents:
+                names = [e.name for e in extracted_ents]
+                evidence_entities.extend(names)
+                # Batch lookup entities in single SQL query
+                conds = [Entity.name.ilike(f"%{n}%") for n in names[:5]]
                 db_ent_stmt = select(Entity).where(
                     Entity.tenant_id == tenant_id,
-                    Entity.name.ilike(e.name),
                     Entity.is_active == True,
+                    or_(*conds) if len(conds) > 1 else conds[0],
                 )
-                db_ent = (await session.execute(db_ent_stmt)).scalars().first()
-                if db_ent:
+                db_ents = (await session.execute(db_ent_stmt)).scalars().all()
+                for db_ent in db_ents:
                     subgraph = await TemporalGraphEngine.traverse_subgraph(
                         session=session,
                         tenant_id=tenant_id,
                         seed_entity_id=db_ent.id,
-                        max_depth=request.max_graph_hops,
+                        max_depth=max(request.max_graph_hops, 3),
                         valid_at=valid_at,
                         recorded_at=request.recorded_at,
                     )
                     # Collect memories linked to subgraph edges
-                    memory_ids = [ed.source_memory_id for ed in subgraph.edges if ed.source_memory_id]
-                    if memory_ids:
-                        mem_stmt = select(Memory).where(Memory.id.in_(memory_ids))
+                    edge_memory_hops: dict[str, int] = {}
+                    for ed in subgraph.edges:
+                        if ed.source_memory_id:
+                            edge_memory_hops.setdefault(ed.source_memory_id, getattr(ed, "hops", 1))
+
+                    if edge_memory_hops:
+                        mem_ids = list(edge_memory_hops.keys())
+                        mem_stmt = select(Memory).where(Memory.id.in_(mem_ids))
                         mems = (await session.execute(mem_stmt)).scalars().all()
                         for idx, m in enumerate(mems):
+                            hops = edge_memory_hops.get(m.id, 1)
                             graph_items.append({
                                 "memory_id": m.id,
                                 "content": m.normalized_content,
                                 "rank": idx + 1,
-                                "hops": 1,
+                                "hops": hops,
                                 "confidence": m.confidence,
                                 "importance": m.importance,
                             })

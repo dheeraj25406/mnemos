@@ -49,6 +49,11 @@ class VectorRetriever:
         else:
             tt_cond = "AND m.recorded_from <= :now AND m.recorded_to > :now"
 
+        try:
+            await session.execute(text("SET LOCAL hnsw.ef_search = 100;"))
+        except Exception:
+            pass
+
         sql = f"""
         SELECT 
             m.id AS memory_id,

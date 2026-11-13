@@ -1,3 +1,4 @@
+import re
 from datetime import datetime, timezone
 
 from pydantic import BaseModel
@@ -33,6 +34,16 @@ class KeywordRetriever:
         if not clean_q:
             return []
 
+        tokens = [t for t in re.findall(r"[a-zA-Z0-9]+", clean_q) if len(t) > 1]
+        stop = {
+            "what", "which", "who", "where", "when", "how", "why", "does", "did",
+            "the", "and", "for", "with", "from", "that", "this", "was", "were",
+            "are", "is", "a", "an", "in", "to", "of", "on", "at", "by", "as"
+        }
+        filtered = [t for t in tokens if t.lower() not in stop]
+        terms = filtered if filtered else tokens
+        or_terms = " | ".join(terms[:16]) if terms else ""
+
         now = datetime.now(timezone.utc)
         vt_cond = ""
         tt_cond = ""
@@ -53,17 +64,35 @@ class KeywordRetriever:
         else:
             tt_cond = "AND m.recorded_from <= :now AND m.recorded_to > :now"
 
+        if or_terms:
+            params["or_terms"] = or_terms
+            match_cond = """
+            AND (
+                to_tsvector('english', m.normalized_content) @@ to_tsquery('english', :or_terms)
+                OR to_tsvector('english', m.normalized_content) @@ websearch_to_tsquery('english', :query)
+            )
+            """
+            rank_expr = """
+            (
+                ts_rank_cd(to_tsvector('english', m.normalized_content), to_tsquery('english', :or_terms))
+                + CASE WHEN to_tsvector('english', m.normalized_content) @@ websearch_to_tsquery('english', :query) THEN 1.0 ELSE 0.0 END
+            )
+            """
+        else:
+            match_cond = "AND to_tsvector('english', m.normalized_content) @@ websearch_to_tsquery('english', :query)"
+            rank_expr = "ts_rank_cd(to_tsvector('english', m.normalized_content), websearch_to_tsquery('english', :query))"
+
         sql = f"""
         SELECT 
             m.id AS memory_id,
             m.normalized_content AS content,
             m.confidence AS confidence,
             m.importance AS importance,
-            ts_rank_cd(to_tsvector('english', m.normalized_content), websearch_to_tsquery('english', :query)) AS score
+            {rank_expr} AS score
         FROM memories m
         WHERE m.tenant_id = :tenant_id
           AND m.is_active = true
-          AND to_tsvector('english', m.normalized_content) @@ websearch_to_tsquery('english', :query)
+          {match_cond}
           {vt_cond}
           {tt_cond}
         ORDER BY score DESC
