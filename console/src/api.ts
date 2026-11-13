@@ -9,8 +9,8 @@ import {
   TimelineDiffResult,
 } from "./types";
 
-const API_BASE = "";
-const DEFAULT_API_KEY = "mnk_test_secret_key_12345";
+const API_BASE = (import.meta.env.VITE_API_URL || "").replace(/\/+$/, "");
+const DEFAULT_API_KEY = import.meta.env.VITE_API_KEY || "mnk_live_default_secret_key_12345";
 
 function getHeaders(): HeadersInit {
   return {
