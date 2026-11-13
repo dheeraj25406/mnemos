@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import Literal
 
-from pydantic import Field
+from pydantic import Field, ValidationInfo, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -40,6 +40,34 @@ class Settings(BaseSettings):
     db_pool_size: int = 20
     db_max_overflow: int = 10
     db_echo: bool = False
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def assemble_async_db_url(cls, v: str | None) -> str:
+        if not v:
+            return "postgresql+asyncpg://mnemos:mnemos_dev_secret@localhost:5432/mnemos"
+        if v.startswith("postgres://"):
+            v = "postgresql://" + v[len("postgres://") :]
+        if v.startswith("postgresql://") and not v.startswith("postgresql+"):
+            return "postgresql+asyncpg://" + v[len("postgresql://") :]
+        return v
+
+    @field_validator("sync_database_url", mode="before")
+    @classmethod
+    def assemble_sync_db_url(cls, v: str | None, info: ValidationInfo) -> str:
+        if not v:
+            db_url = info.data.get("database_url", "")
+            if isinstance(db_url, str):
+                if db_url.startswith("postgresql+asyncpg://"):
+                    return "postgresql+psycopg://" + db_url[len("postgresql+asyncpg://") :]
+                elif db_url.startswith("postgresql://"):
+                    return "postgresql+psycopg://" + db_url[len("postgresql://") :]
+            return "postgresql+psycopg://mnemos:mnemos_dev_secret@localhost:5432/mnemos"
+        if v.startswith("postgres://"):
+            v = "postgresql://" + v[len("postgres://") :]
+        if v.startswith("postgresql://") and not v.startswith("postgresql+"):
+            return "postgresql+psycopg://" + v[len("postgresql://") :]
+        return v
 
     # Redis
     redis_url: str = "redis://localhost:6379/0"

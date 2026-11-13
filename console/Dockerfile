@@ -1,0 +1,44 @@
+# Multi-stage build for Mnemos Console
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . ./
+
+ARG VITE_API_URL
+ARG VITE_API_KEY
+ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_API_KEY=$VITE_API_KEY
+
+RUN npm run build
+
+FROM nginx:1.27-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Use entrypoint script to substitute PORT dynamically for cloud platforms (Railway, Render)
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY <<'EOF' /docker-entrypoint.d/40-envsubst-port.sh
+#!/bin/sh
+PORT="${PORT:-80}"
+cat <<CONF > /etc/nginx/conf.d/default.conf
+server {
+    listen ${PORT};
+    server_name localhost;
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files \$uri \$uri/ /index.html;
+    }
+}
+CONF
+EOF
+
+RUN chmod +x /docker-entrypoint.d/40-envsubst-port.sh
+
+ENV PORT=80
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
