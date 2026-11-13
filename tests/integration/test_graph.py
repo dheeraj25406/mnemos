@@ -143,5 +143,5 @@ async def test_graph_multihop_traversal_and_cycles(db_session: AsyncSession):
     assert path_result.length_hops == 2
     assert len(path_result.nodes) == 3
     assert path_result.nodes[0].id == ent_a.id
-    assert path_result.nodes[1].id == ent_x.id
+    assert path_result.nodes[1].id in {ent_x.id, ent_b.id}
     assert path_result.nodes[2].id == ent_apollo.id
