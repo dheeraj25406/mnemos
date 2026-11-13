@@ -1,9 +1,9 @@
 import math
-from datetime import datetime, timezone, timedelta
-from sqlalchemy import select, update, delete
+from datetime import datetime, timedelta, timezone
+
+from sqlalchemy import delete, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.core.logging import logger
 from mnemos.db.models import (
     AuditEvent,
     ConsolidationMember,

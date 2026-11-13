@@ -1,11 +1,12 @@
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
+
 import pytest
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from mnemos.consolidation.lifecycle import LifecycleManager
 from mnemos.consolidation.summarizer import ConsolidationManager
-from mnemos.db.models import Fact, Memory, MemoryConsolidation, MemoryEmbedding
+from mnemos.db.models import Memory, MemoryEmbedding
 from mnemos.ingestion.pipeline import IngestionItem, IngestionPipeline
 
 

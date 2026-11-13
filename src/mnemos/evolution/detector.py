@@ -1,12 +1,13 @@
 from datetime import datetime, timezone
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from mnemos.db.models import Fact
 from mnemos.evolution.policies import (
+    MUTUALLY_EXCLUSIVE_PREDICATES,
     ConflictClassification,
     ConflictReport,
-    MUTUALLY_EXCLUSIVE_PREDICATES,
 )
 from mnemos.temporal.intervals import TimeInterval, ensure_utc
 

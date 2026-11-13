@@ -2,18 +2,19 @@ import hashlib
 import uuid
 from datetime import datetime, timezone
 from typing import Any
+
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from mnemos.core.logging import logger
 from mnemos.db.models import (
+    SENTINEL_MAX_TIME,
     AuditEvent,
     Fact,
     Memory,
     MemoryEmbedding,
     Relationship,
-    SENTINEL_MAX_TIME,
 )
 from mnemos.ingestion.extractor import MemoryExtractor
 from mnemos.ingestion.resolver import EntityResolver

@@ -1,7 +1,8 @@
 import hashlib
-import numpy as np
 from abc import ABC, abstractmethod
 from typing import Sequence
+
+import numpy as np
 
 from mnemos.core.config import get_settings
 

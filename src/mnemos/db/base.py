@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
+
 from sqlalchemy import MetaData
 from sqlalchemy.orm import DeclarativeBase
-
 
 # Naming convention for database constraints to ensure clean migrations
 convention = {

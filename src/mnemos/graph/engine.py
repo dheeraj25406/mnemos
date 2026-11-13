@@ -1,9 +1,9 @@
 from datetime import datetime, timezone
 from typing import Literal
+
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.core.logging import logger
 from mnemos.graph.traversal import GraphEdge, GraphNode, PathResult, SubgraphResult
 from mnemos.temporal.intervals import ensure_utc
 

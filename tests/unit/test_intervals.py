@@ -1,10 +1,11 @@
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
+
 import pytest
+
 from mnemos.temporal.intervals import (
-    TimeInterval,
-    BitemporalInterval,
     SENTINEL_MAX,
-    ensure_utc,
+    BitemporalInterval,
+    TimeInterval,
 )
 
 

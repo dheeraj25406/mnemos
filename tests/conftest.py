@@ -1,12 +1,13 @@
-import pytest_asyncio
 from collections.abc import AsyncGenerator
-from sqlalchemy import select, text
+
+import pytest_asyncio
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.pool import NullPool
 
 from mnemos.core.config import get_settings
-from mnemos.db.models import Tenant, APIKey
 from mnemos.core.security import hash_api_key
+from mnemos.db.models import APIKey, Tenant
 
 settings = get_settings()
 

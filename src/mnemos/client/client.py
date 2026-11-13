@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Any
+
 import httpx
 
 from mnemos.client.models import SearchResult, TimelineDiff

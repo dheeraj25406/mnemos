@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 from datetime import datetime
+
 from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Index, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from mnemos.db.base import Base, SENTINEL_MAX_TIME, utc_now
+from mnemos.db.base import Base, utc_now
 
 
 class Memory(Base):

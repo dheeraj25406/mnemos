@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from typing import Self
+
 from pydantic import BaseModel, Field
 
 # High sentinel timestamp for open-ended half-open intervals [start, end)

@@ -1,8 +1,9 @@
 from datetime import datetime, timezone
+
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.db.models import Relationship, SENTINEL_MAX_TIME
+from mnemos.db.models import SENTINEL_MAX_TIME, Relationship
 from mnemos.graph.engine import TemporalGraphEngine
 from mnemos.ingestion.resolver import EntityResolver
 

@@ -1,10 +1,9 @@
 from datetime import datetime, timezone
+
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.evolution.resolver import EvolutionManager
-from mnemos.ingestion.pipeline import IngestionPipeline, IngestionItem
-from mnemos.ingestion.resolver import EntityResolver
+from mnemos.ingestion.pipeline import IngestionItem, IngestionPipeline
 from mnemos.retrieval.hybrid import HybridRetrievalEngine, HybridRetrievalRequest
 from mnemos.temporal.reasoning import TemporalReasoningEngine
 

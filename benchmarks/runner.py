@@ -6,16 +6,16 @@ import platform
 import sys
 import time
 from datetime import datetime, timezone
+
 import numpy as np
 
 sys.path.insert(0, os.path.abspath("src"))
 
-from sqlalchemy import select
-from mnemos.db.models import Tenant, APIKey
+from mnemos.core.security import hash_api_key
+from mnemos.db.models import APIKey, Tenant
 from mnemos.db.session import AsyncSessionLocal, init_db
 from mnemos.ingestion.pipeline import IngestionItem, IngestionPipeline
 from mnemos.retrieval.hybrid import HybridRetrievalEngine, HybridRetrievalRequest
-from mnemos.core.security import hash_api_key
 
 
 async def setup_benchmark_tenant(session, tenant_id: str):

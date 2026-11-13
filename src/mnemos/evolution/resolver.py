@@ -1,10 +1,9 @@
 import uuid
 from datetime import datetime, timezone
-from sqlalchemy import select
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.core.logging import logger
-from mnemos.db.models import AuditEvent, Fact, Relationship, SENTINEL_MAX_TIME
+from mnemos.db.models import SENTINEL_MAX_TIME, AuditEvent, Fact
 from mnemos.evolution.detector import ContradictionDetector
 from mnemos.evolution.policies import (
     ConflictClassification,

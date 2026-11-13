@@ -1,18 +1,16 @@
 import uuid
 from datetime import datetime, timezone
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.core.logging import logger
 from mnemos.db.models import (
     AuditEvent,
     ConsolidationMember,
-    Entity,
     Fact,
     Memory,
     MemoryConsolidation,
-    MemoryEmbedding,
 )
 
 

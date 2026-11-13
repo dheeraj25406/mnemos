@@ -1,4 +1,3 @@
-import pytest
 from mnemos.mcp.server import mcp_server
 
 

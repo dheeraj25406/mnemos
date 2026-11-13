@@ -1,11 +1,12 @@
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
+
 import pytest
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.db.models import Fact, Entity, SENTINEL_MAX_TIME
-from mnemos.temporal.bitemporal import BitemporalManager, apply_bitemporal_filters
+from mnemos.db.models import SENTINEL_MAX_TIME, Fact
 from mnemos.ingestion.resolver import EntityResolver
+from mnemos.temporal.bitemporal import apply_bitemporal_filters
 
 
 @pytest.mark.asyncio

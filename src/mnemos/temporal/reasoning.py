@@ -1,11 +1,11 @@
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Any
+
 from pydantic import BaseModel, Field
-from sqlalchemy import select, and_, text
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.db.models import Fact, Entity, Relationship
-from mnemos.graph.engine import TemporalGraphEngine
+from mnemos.db.models import Entity, Fact
 from mnemos.temporal.bitemporal import apply_bitemporal_filters
 from mnemos.temporal.intervals import ensure_utc
 

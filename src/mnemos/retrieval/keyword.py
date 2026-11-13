@@ -1,7 +1,8 @@
 from datetime import datetime, timezone
+
+from pydantic import BaseModel
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-from pydantic import BaseModel
 
 from mnemos.temporal.intervals import ensure_utc
 

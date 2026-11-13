@@ -1,8 +1,9 @@
+from collections.abc import AsyncGenerator
 from datetime import datetime, timezone
+
 import httpx
 import pytest
 import pytest_asyncio
-from collections.abc import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from mnemos.api.app import app

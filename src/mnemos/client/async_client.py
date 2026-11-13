@@ -1,8 +1,9 @@
 from datetime import datetime
 from typing import Any
+
 import httpx
 
-from mnemos.client.models import MemoryItem, SearchResult, TimelineDiff
+from mnemos.client.models import SearchResult, TimelineDiff
 
 
 class AsyncMnemos:
@@ -90,7 +91,7 @@ class AsyncMnemos:
 
     async def get_history(self, entity: str) -> list[dict[str, Any]]:
         """Retrieve historical memories and facts associated with an entity."""
-        resp = await self._client.get(f"/v1/memories", params={"limit": 50})
+        resp = await self._client.get("/v1/memories", params={"limit": 50})
         resp.raise_for_status()
         items = resp.json().get("items", [])
         return [it for it in items if entity.lower() in it["content"].lower()]

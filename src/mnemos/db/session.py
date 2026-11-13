@@ -1,12 +1,12 @@
 from collections.abc import AsyncGenerator
-from sqlalchemy import text
+
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
     create_async_engine,
 )
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import Session, sessionmaker
 
 from mnemos.core.config import get_settings
 from mnemos.db.base import Base
@@ -70,8 +70,8 @@ async def init_db() -> None:
         await conn.execute(text('CREATE EXTENSION IF NOT EXISTS "btree_gist";'))
         await conn.run_sync(Base.metadata.create_all)
 
-    from mnemos.db.models import Tenant, APIKey
     from mnemos.core.security import hash_api_key
+    from mnemos.db.models import APIKey, Tenant
 
     async with AsyncSessionLocal() as session:
         t = await session.get(Tenant, settings.default_tenant_id)

@@ -1,9 +1,10 @@
 from datetime import datetime, timezone
-from typing import Any, TypeVar
+from typing import TypeVar
+
 from sqlalchemy import Select, and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.db.models import Fact, Relationship, Memory, SENTINEL_MAX_TIME
+from mnemos.db.models import SENTINEL_MAX_TIME, Fact, Memory, Relationship
 from mnemos.temporal.intervals import ensure_utc
 
 T = TypeVar("T", Fact, Relationship, Memory)

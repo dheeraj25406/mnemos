@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-11-13T03:38:23.069292+00:00",
+  "timestamp": "2026-11-13T03:47:01.114673+00:00",
   "os": "Darwin",
   "machine": "arm64",
   "python_version": "3.11.14",
   "total_memories": 6,
-  "ingestion_throughput_tps": 14.27,
+  "ingestion_throughput_tps": 20.31,
   "baselines": [
     {
       "baseline": "keyword_only",
@@ -12,9 +12,9 @@
       "recall@5": 0.0,
       "mrr": 0.0,
       "temporal_accuracy": 0.0,
-      "latency_p50_ms": 0.96,
-      "latency_p95_ms": 6.03,
-      "latency_p99_ms": 6.25
+      "latency_p50_ms": 0.85,
+      "latency_p95_ms": 2.69,
+      "latency_p99_ms": 2.98
     },
     {
       "baseline": "vector_only",
@@ -22,9 +22,9 @@
       "recall@5": 0.8,
       "mrr": 0.6,
       "temporal_accuracy": 0.4,
-      "latency_p50_ms": 5.57,
-      "latency_p95_ms": 6.8,
-      "latency_p99_ms": 7.0
+      "latency_p50_ms": 5.85,
+      "latency_p95_ms": 7.0,
+      "latency_p99_ms": 7.03
     },
     {
       "baseline": "hybrid_no_temporal",
@@ -32,9 +32,9 @@
       "recall@5": 0.8,
       "mrr": 0.6,
       "temporal_accuracy": 0.4,
-      "latency_p50_ms": 5.39,
-      "latency_p95_ms": 6.0,
-      "latency_p99_ms": 6.08
+      "latency_p50_ms": 5.0,
+      "latency_p95_ms": 6.12,
+      "latency_p99_ms": 6.18
     },
     {
       "baseline": "graph_only",
@@ -42,9 +42,9 @@
       "recall@5": 0.6,
       "mrr": 0.5,
       "temporal_accuracy": 0.3,
-      "latency_p50_ms": 2.45,
-      "latency_p95_ms": 11.89,
-      "latency_p99_ms": 13.64
+      "latency_p50_ms": 3.13,
+      "latency_p95_ms": 10.4,
+      "latency_p99_ms": 11.83
     },
     {
       "baseline": "full_mnemos",
@@ -52,9 +52,9 @@
       "recall@5": 1.0,
       "mrr": 0.8,
       "temporal_accuracy": 0.6,
-      "latency_p50_ms": 8.5,
-      "latency_p95_ms": 11.02,
-      "latency_p99_ms": 11.5
+      "latency_p50_ms": 7.71,
+      "latency_p95_ms": 10.53,
+      "latency_p99_ms": 10.93
     }
   ]
 }

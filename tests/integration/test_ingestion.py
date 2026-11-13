@@ -1,11 +1,11 @@
 from datetime import datetime, timezone
+
 import pytest
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.db.models import Memory, Entity, Fact, Relationship, AuditEvent, MemoryEmbedding
-from mnemos.ingestion.pipeline import IngestionPipeline, IngestionItem
-from mnemos.ingestion.resolver import EntityResolver
+from mnemos.db.models import AuditEvent, Entity, Fact, Memory, MemoryEmbedding, Relationship
+from mnemos.ingestion.pipeline import IngestionItem, IngestionPipeline
 
 
 @pytest.mark.asyncio
