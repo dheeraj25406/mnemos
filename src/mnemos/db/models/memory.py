@@ -44,7 +44,7 @@ class Memory(Base):
         String(64), ForeignKey("memories.id", ondelete="SET NULL"), nullable=True
     )
     consolidated_into_id: Mapped[str | None] = mapped_column(
-        String(64), ForeignKey("memories.id", ondelete="SET NULL"), nullable=True
+        String(64), ForeignKey("memory_consolidations.id", ondelete="SET NULL"), nullable=True
     )
 
     metadata_: Mapped[dict] = mapped_column("metadata", JSONB, default=dict, nullable=False)
