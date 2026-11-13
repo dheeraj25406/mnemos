@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: mnemos-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -e .
+    startCommand: ./docker/entrypoint.sh
+    healthCheckPath: /v1/health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: EMBEDDING_PROVIDER
+        value: fastembed
+      - key: DATABASE_URL
+        sync: false
+      - key: SYNC_DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+
+  - type: web
+    name: mnemos-console
+    runtime: static
+    plan: free
+    buildCommand: cd console && npm ci && npm run build
+    staticPublishPath: ./console/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        sync: false
