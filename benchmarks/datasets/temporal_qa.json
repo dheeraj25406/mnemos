@@ -1,0 +1,67 @@
+[
+  {
+    "id": "q1_temporal_fact",
+    "query": "Where did Alice work in March 2024?",
+    "valid_at": "2024-03-15T00:00:00Z",
+    "expected_target": "Acme Corp",
+    "facts_to_seed": [
+      {
+        "content": "Alice works at Acme Corp as of 2024-01-10",
+        "valid_from": "2024-01-10T00:00:00Z"
+      },
+      {
+        "content": "Alice left Acme Corp and works at Globex in 2024-06-01",
+        "valid_from": "2024-06-01T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "q2_temporal_evolution",
+    "query": "Where does Alice work in August 2024?",
+    "valid_at": "2024-08-15T00:00:00Z",
+    "expected_target": "Globex",
+    "facts_to_seed": []
+  },
+  {
+    "id": "q3_multihop_graph",
+    "query": "What project is Alice connected to through Globex in 2024?",
+    "valid_at": "2024-08-15T00:00:00Z",
+    "expected_target": "Project Titan",
+    "facts_to_seed": [
+      {
+        "content": "Globex created Project Titan in 2024-05-01",
+        "valid_from": "2024-05-01T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "q4_contradiction_resolution",
+    "query": "Where is Bob located?",
+    "valid_at": "2024-07-01T00:00:00Z",
+    "expected_target": "Tokyo",
+    "facts_to_seed": [
+      {
+        "content": "Unverified rumor claims Bob lives in Kyoto in 2024-07-01",
+        "valid_from": "2024-07-01T00:00:00Z",
+        "confidence": 0.3
+      },
+      {
+        "content": "Official passport record confirms Bob relocated to Tokyo in 2024-07-01",
+        "valid_from": "2024-07-01T00:00:00Z",
+        "confidence": 0.98
+      }
+    ]
+  },
+  {
+    "id": "q5_knowledge_history",
+    "query": "What tool does Team Alpha adopt?",
+    "valid_at": "2024-09-01T00:00:00Z",
+    "expected_target": "PostgreSQL",
+    "facts_to_seed": [
+      {
+        "content": "Team Alpha adopted PostgreSQL for temporal storage in 2024-09-01",
+        "valid_from": "2024-09-01T00:00:00Z"
+      }
+    ]
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-11-13T03:38:23.069292+00:00",
+  "os": "Darwin",
+  "machine": "arm64",
+  "python_version": "3.11.14",
+  "total_memories": 6,
+  "ingestion_throughput_tps": 14.27,
+  "baselines": [
+    {
+      "baseline": "keyword_only",
+      "recall@1": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "temporal_accuracy": 0.0,
+      "latency_p50_ms": 0.96,
+      "latency_p95_ms": 6.03,
+      "latency_p99_ms": 6.25
+    },
+    {
+      "baseline": "vector_only",
+      "recall@1": 0.4,
+      "recall@5": 0.8,
+      "mrr": 0.6,
+      "temporal_accuracy": 0.4,
+      "latency_p50_ms": 5.57,
+      "latency_p95_ms": 6.8,
+      "latency_p99_ms": 7.0
+    },
+    {
+      "baseline": "hybrid_no_temporal",
+      "recall@1": 0.4,
+      "recall@5": 0.8,
+      "mrr": 0.6,
+      "temporal_accuracy": 0.4,
+      "latency_p50_ms": 5.39,
+      "latency_p95_ms": 6.0,
+      "latency_p99_ms": 6.08
+    },
+    {
+      "baseline": "graph_only",
+      "recall@1": 0.4,
+      "recall@5": 0.6,
+      "mrr": 0.5,
+      "temporal_accuracy": 0.3,
+      "latency_p50_ms": 2.45,
+      "latency_p95_ms": 11.89,
+      "latency_p99_ms": 13.64
+    },
+    {
+      "baseline": "full_mnemos",
+      "recall@1": 0.6,
+      "recall@5": 1.0,
+      "mrr": 0.8,
+      "temporal_accuracy": 0.6,
+      "latency_p50_ms": 8.5,
+      "latency_p95_ms": 11.02,
+      "latency_p99_ms": 11.5
+    }
+  ]
+}

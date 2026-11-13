@@ -1,0 +1,6 @@
+baseline,recall@1,recall@5,mrr,temporal_accuracy,latency_p50_ms,latency_p95_ms,latency_p99_ms
+keyword_only,0.0,0.0,0.0,0.0,0.96,6.03,6.25
+vector_only,0.4,0.8,0.6,0.4,5.57,6.8,7.0
+hybrid_no_temporal,0.4,0.8,0.6,0.4,5.39,6.0,6.08
+graph_only,0.4,0.6,0.5,0.3,2.45,11.89,13.64
+full_mnemos,0.6,1.0,0.8,0.6,8.5,11.02,11.5
