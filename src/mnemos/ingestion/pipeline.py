@@ -60,10 +60,14 @@ class IngestionPipeline:
         content_hash = cls.compute_hash(item.content)
 
         # 1. Idempotency Check
-        existing_stmt = select(Memory).where(
-            Memory.tenant_id == tenant_id,
-            Memory.content_hash == content_hash,
-            Memory.is_active == True,
+        existing_stmt = (
+            select(Memory)
+            .where(
+                Memory.tenant_id == tenant_id,
+                Memory.content_hash == content_hash,
+                Memory.is_active == True,
+            )
+            .limit(1)
         )
         existing = (await session.execute(existing_stmt)).scalars().first()
         if existing:
@@ -123,6 +127,7 @@ class IngestionPipeline:
         # 5. Create Facts and Graph Relationships
         facts_created = 0
         relationships_created = 0
+        rels_to_create = []
 
         for f in extracted_facts:
             subj_entity = resolved_entities.get(f.subject.lower())
@@ -170,7 +175,7 @@ class IngestionPipeline:
             session.add(fact)
             facts_created += 1
 
-            # If relationship between two entities, create graph edge
+            # If relationship between two entities, prepare graph edge
             if obj_entity and subj_entity.id != obj_entity.id:
                 rel_id = f"rel_{uuid.uuid4().hex[:12]}"
                 rel = Relationship(
@@ -189,8 +194,17 @@ class IngestionPipeline:
                     is_active=True,
                     properties=f.metadata,
                 )
-                session.add(rel)
-                relationships_created += 1
+                rels_to_create.append(rel)
+
+        # Flush facts first so foreign key references to facts exist
+        await session.flush()
+
+        for rel in rels_to_create:
+            session.add(rel)
+            relationships_created += 1
+
+        if rels_to_create:
+            await session.flush()
 
         # 6. Generate Vector Embedding
         provider = get_embedding_provider()

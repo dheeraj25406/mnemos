@@ -29,10 +29,14 @@ class EntityResolver:
         lower_name = clean_name.lower()
 
         # 1. Check direct name match
-        direct_stmt = select(Entity).where(
-            Entity.tenant_id == tenant_id,
-            func.lower(Entity.name) == lower_name,
-            Entity.is_active == True,
+        direct_stmt = (
+            select(Entity)
+            .where(
+                Entity.tenant_id == tenant_id,
+                func.lower(Entity.name) == lower_name,
+                Entity.is_active == True,
+            )
+            .limit(1)
         )
         result = await session.execute(direct_stmt)
         entity = result.scalars().first()
@@ -53,6 +57,7 @@ class EntityResolver:
                 func.lower(EntityAlias.alias) == lower_name,
                 Entity.is_active == True,
             )
+            .limit(1)
         )
         alias_result = await session.execute(alias_stmt)
         entity_from_alias = alias_result.scalars().first()

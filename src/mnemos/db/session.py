@@ -62,10 +62,33 @@ async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
 
 
 async def init_db() -> None:
-    """Ensure vector extensions and initialize database tables."""
+    """Ensure vector extensions and initialize database tables and default tenant."""
     async with async_engine.begin() as conn:
         await conn.execute(text('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'))
         await conn.execute(text('CREATE EXTENSION IF NOT EXISTS "vector";'))
         await conn.execute(text('CREATE EXTENSION IF NOT EXISTS "pg_trgm";'))
         await conn.execute(text('CREATE EXTENSION IF NOT EXISTS "btree_gist";'))
         await conn.run_sync(Base.metadata.create_all)
+
+    from mnemos.db.models import Tenant, APIKey
+    from mnemos.core.security import hash_api_key
+
+    async with AsyncSessionLocal() as session:
+        t = await session.get(Tenant, settings.default_tenant_id)
+        if not t:
+            tenant = Tenant(
+                id=settings.default_tenant_id,
+                name="Default Tenant",
+                config={},
+            )
+            session.add(tenant)
+            key = APIKey(
+                id="key_default_root",
+                tenant_id=settings.default_tenant_id,
+                key_hash=hash_api_key(settings.default_tenant_key),
+                key_prefix=settings.default_tenant_key[:12],
+                name="default_key",
+                rate_limit=1000,
+            )
+            session.add(key)
+            await session.commit()
