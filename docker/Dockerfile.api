@@ -4,7 +4,8 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app/src
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -13,12 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml README.md ./
-RUN pip install --no-cache-dir -e .
+COPY src ./src
+RUN pip install --no-cache-dir .
 
 COPY alembic.ini ./
 COPY migrations ./migrations
 COPY docker/entrypoint.sh ./docker/entrypoint.sh
-COPY src ./src
 
 RUN chmod +x ./docker/entrypoint.sh
 

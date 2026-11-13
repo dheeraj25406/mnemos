@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+export PYTHONPATH="${PYTHONPATH:-/app/src}:src"
+
 echo "[Mnemos] Starting production entrypoint..."
 
 # Wait for PostgreSQL if DATABASE_URL or SYNC_DATABASE_URL is provided
