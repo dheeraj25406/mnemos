@@ -12,6 +12,8 @@ class KeywordRetrievalResult(BaseModel):
     content: str
     bm25_score: float
     rank: int
+    confidence: float = 1.0
+    importance: float = 0.5
 
 
 class KeywordRetriever:
@@ -55,6 +57,8 @@ class KeywordRetriever:
         SELECT 
             m.id AS memory_id,
             m.normalized_content AS content,
+            m.confidence AS confidence,
+            m.importance AS importance,
             ts_rank_cd(to_tsvector('english', m.normalized_content), websearch_to_tsquery('english', :query)) AS score
         FROM memories m
         WHERE m.tenant_id = :tenant_id
@@ -77,6 +81,8 @@ class KeywordRetriever:
                     content=row["content"],
                     bm25_score=float(row["score"]),
                     rank=idx + 1,
+                    confidence=float(row.get("confidence") or 1.0),
+                    importance=float(row.get("importance") or 0.5),
                 )
             )
         return results

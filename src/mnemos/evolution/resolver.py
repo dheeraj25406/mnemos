@@ -1,9 +1,10 @@
 import uuid
 from datetime import datetime, timezone
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from mnemos.db.models import SENTINEL_MAX_TIME, AuditEvent, Fact
+from mnemos.db.models import SENTINEL_MAX_TIME, AuditEvent, Fact, Memory, Relationship
 from mnemos.evolution.detector import ContradictionDetector
 from mnemos.evolution.policies import (
     ConflictClassification,
@@ -116,6 +117,24 @@ class EvolutionManager:
                 )
                 session.add(old_fact_closed)
 
+                # Close valid window of source memory if present
+                if old_fact.source_memory_id:
+                    old_mem = await session.get(Memory, old_fact.source_memory_id)
+                    if old_mem and old_mem.valid_to > vf:
+                        old_mem.valid_to = vf
+                        old_mem.superseded_by_id = source_memory_id
+
+                # Close valid window of any existing relationship
+                rel_stmt = select(Relationship).where(
+                    Relationship.tenant_id == tenant_id,
+                    Relationship.source_entity_id == old_fact.subject_id,
+                    Relationship.relation_type == old_fact.predicate,
+                    Relationship.valid_to > vf,
+                )
+                old_rels = (await session.execute(rel_stmt)).scalars().all()
+                for old_rel in old_rels:
+                    old_rel.valid_to = vf
+
                 # Record audit trail
                 audit = AuditEvent(
                     tenant_id=tenant_id,
@@ -158,11 +177,20 @@ class EvolutionManager:
                         old_fact.recorded_to = now
                         old_fact.is_retracted = True
                         old_fact.superseded_by_id = new_fact.id
+                        if old_fact.source_memory_id:
+                            old_mem = await session.get(Memory, old_fact.source_memory_id)
+                            if old_mem:
+                                old_mem.is_active = False
+                                old_mem.superseded_by_id = source_memory_id
                     else:
                         # Old fact wins: retract new fact immediately
                         new_fact.is_retracted = True
                         new_fact.recorded_to = now
                         session.add(new_fact)
+                        if source_memory_id:
+                            new_mem = await session.get(Memory, source_memory_id)
+                            if new_mem:
+                                new_mem.is_active = False
 
                 elif policy == ResolutionPolicy.CONFIDENCE_WEIGHTED:
                     score_new = confidence * importance
@@ -172,10 +200,19 @@ class EvolutionManager:
                         await session.flush()
                         old_fact.recorded_to = now
                         old_fact.superseded_by_id = new_fact.id
+                        if old_fact.source_memory_id:
+                            old_mem = await session.get(Memory, old_fact.source_memory_id)
+                            if old_mem:
+                                old_mem.is_active = False
+                                old_mem.superseded_by_id = source_memory_id
                     else:
                         new_fact.is_retracted = True
                         new_fact.recorded_to = now
                         session.add(new_fact)
+                        if source_memory_id:
+                            new_mem = await session.get(Memory, source_memory_id)
+                            if new_mem:
+                                new_mem.is_active = False
 
                 else:  # TEMPORAL_RECENCY
                     session.add(new_fact)

@@ -11,11 +11,12 @@ from mnemos.core.logging import logger
 from mnemos.db.models import (
     SENTINEL_MAX_TIME,
     AuditEvent,
-    Fact,
     Memory,
     MemoryEmbedding,
     Relationship,
 )
+from mnemos.evolution.policies import ResolutionPolicy
+from mnemos.evolution.resolver import EvolutionManager
 from mnemos.ingestion.extractor import MemoryExtractor
 from mnemos.ingestion.resolver import EntityResolver
 from mnemos.retrieval.embeddings import get_embedding_provider
@@ -156,24 +157,28 @@ class IngestionPipeline:
             fact_valid_from = f.valid_from or valid_from
             fact_valid_to = f.valid_to or valid_to
 
-            fact_id = f"fact_{uuid.uuid4().hex[:12]}"
-            fact = Fact(
-                id=fact_id,
+            policy = (
+                ResolutionPolicy.SOURCE_RELIABILITY
+                if f.confidence != 1.0 or item.confidence != 1.0
+                else ResolutionPolicy.TEMPORAL_RECENCY
+            )
+
+            fact = await EvolutionManager.process_fact_evolution(
+                session=session,
                 tenant_id=tenant_id,
-                source_memory_id=memory_id,
                 subject_id=subj_entity.id,
                 predicate=f.predicate,
                 object_id=obj_entity.id if obj_entity else None,
                 object_literal=f.object if f.is_literal else None,
                 valid_from=fact_valid_from,
                 valid_to=fact_valid_to,
-                recorded_from=now,
-                recorded_to=SENTINEL_MAX_TIME,
-                confidence=f.confidence,
+                confidence=f.confidence * item.confidence,
                 importance=item.importance,
-                metadata_=f.metadata,
+                source_memory_id=memory_id,
+                policy=policy,
+                metadata=f.metadata,
             )
-            session.add(fact)
+            fact_id = fact.id
             facts_created += 1
 
             # If relationship between two entities, prepare graph edge

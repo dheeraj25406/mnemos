@@ -12,6 +12,8 @@ class VectorRetrievalResult(BaseModel):
     content: str
     similarity: float
     rank: int
+    confidence: float = 1.0
+    importance: float = 0.5
 
 
 class VectorRetriever:
@@ -51,6 +53,8 @@ class VectorRetriever:
         SELECT 
             m.id AS memory_id,
             m.normalized_content AS content,
+            m.confidence AS confidence,
+            m.importance AS importance,
             1 - (e.embedding <=> CAST(:qvec AS vector)) AS similarity
         FROM memory_embeddings e
         JOIN memories m ON m.id = e.memory_id
@@ -74,6 +78,8 @@ class VectorRetriever:
                     content=row["content"],
                     similarity=max(0.0, sim),
                     rank=idx + 1,
+                    confidence=float(row.get("confidence") or 1.0),
+                    importance=float(row.get("importance") or 0.5),
                 )
             )
         return results

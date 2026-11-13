@@ -1,0 +1,4 @@
+system,cases_evaluated,semantic_recall@5,historical_version_accuracy,current_state_accuracy,temporal_contamination_rate,latency_p50_ms,latency_p95_ms,latency_p99_ms
+vector_only,20,1.0,0.7143,0.6667,0.25,5.17,5.97,6.59
+hybrid_no_temporal,20,1.0,0.7143,0.6667,0.25,9.06,13.03,14.56
+full_mnemos,20,1.0,1.0,1.0,0.0,8.86,14.69,23.65

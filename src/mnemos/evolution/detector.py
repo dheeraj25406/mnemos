@@ -53,14 +53,13 @@ class ContradictionDetector:
         is_mutually_exclusive = predicate in MUTUALLY_EXCLUSIVE_PREDICATES
 
         for ef in existing_facts:
-            # Check if target values differ
-            same_target = (
-                (object_id is not None and ef.object_id == object_id)
-                or (object_literal is not None and ef.object_literal == object_literal)
-            )
+            # Check if target values differ: both object_id and object_literal must match
+            same_object_id = (object_id is None and ef.object_id is None) or (object_id == ef.object_id)
+            same_literal = (object_literal is None and ef.object_literal is None) or (object_literal == ef.object_literal)
+            same_target = same_object_id and same_literal
 
             if same_target:
-                continue  # Same fact, no contradiction
+                continue  # Identical fact, no contradiction
 
             # Target is different. Check temporal overlap.
             ef_interval = TimeInterval(start=ef.valid_from, end=ef.valid_to)

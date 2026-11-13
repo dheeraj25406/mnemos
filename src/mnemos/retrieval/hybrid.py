@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -66,6 +66,9 @@ class HybridRetrievalEngine:
             extracted_anchor = MemoryExtractor.extract_temporal_anchor(request.query)
             if extracted_anchor:
                 valid_at = extracted_anchor
+            else:
+                # Default to CURRENT valid time so historical superseded facts are excluded from current queries
+                valid_at = datetime.now(timezone.utc)
 
         # 2. Vector Channel
         if request.enable_vector:
@@ -86,6 +89,8 @@ class HybridRetrievalEngine:
                         "content": r.content,
                         "rank": r.rank,
                         "score": r.similarity,
+                        "confidence": r.confidence,
+                        "importance": r.importance,
                     })
             except Exception as e:
                 logger.warning(f"Vector search failed: {e}")
@@ -106,6 +111,8 @@ class HybridRetrievalEngine:
                     "content": r.content,
                     "rank": r.rank,
                     "score": r.bm25_score,
+                    "confidence": r.confidence,
+                    "importance": r.importance,
                 })
 
         # 4. Knowledge Graph Channel (Entity-centered multi-hop expansion)
