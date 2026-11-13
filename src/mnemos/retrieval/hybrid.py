@@ -23,6 +23,7 @@ class HybridRetrievalRequest(BaseModel):
     enable_vector: bool = True
     enable_keyword: bool = True
     enable_graph: bool = True
+    enable_temporal_filtering: bool = True
     max_graph_hops: int = 2
     weight_vector: float = 1.0
     weight_keyword: float = 0.8
@@ -60,8 +61,8 @@ class HybridRetrievalEngine:
         evidence_entities: list[str] = []
 
         # 1. Parse query temporal anchor if request.valid_at is not explicitly provided
-        valid_at = request.valid_at
-        if valid_at is None:
+        valid_at = request.valid_at if request.enable_temporal_filtering else None
+        if request.enable_temporal_filtering and valid_at is None:
             extracted_anchor = MemoryExtractor.extract_temporal_anchor(request.query)
             if extracted_anchor:
                 valid_at = extracted_anchor

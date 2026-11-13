@@ -1,66 +1,1791 @@
 [
   {
-    "id": "q1_temporal_fact",
-    "query": "Where did Alice work in March 2024?",
-    "valid_at": "2024-03-15T00:00:00Z",
-    "expected_target": "Acme Corp",
+    "id": "sem_01",
+    "category": "semantic_retrieval",
+    "query": "Who specializes in quantum-resistant cryptography?",
+    "expected_target": "David",
+    "invalid_outdated_target": null,
+    "valid_at": null,
     "facts_to_seed": [
       {
-        "content": "Alice works at Acme Corp as of 2024-01-10",
-        "valid_from": "2024-01-10T00:00:00Z"
-      },
-      {
-        "content": "Alice left Acme Corp and works at Globex in 2024-06-01",
-        "valid_from": "2024-06-01T00:00:00Z"
+        "content": "David is a principal researcher in post-quantum lattice-based encryption algorithms.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
       }
     ]
   },
   {
-    "id": "q2_temporal_evolution",
-    "query": "Where does Alice work in August 2024?",
-    "valid_at": "2024-08-15T00:00:00Z",
-    "expected_target": "Globex",
+    "id": "sem_02",
+    "category": "semantic_retrieval",
+    "query": "What caused the failure of the Orion computing cluster?",
+    "expected_target": "memory saturation",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "The Orion computing infrastructure crashed due to severe memory saturation and OOM kills.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_03",
+    "category": "semantic_retrieval",
+    "query": "Who filed patents for brain-inspired neuromorphic chips?",
+    "expected_target": "Elena",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Elena authored three foundational patents on neuromorphic hardware accelerators.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_04",
+    "category": "semantic_retrieval",
+    "query": "What authentication protocol is mandatory for internal microservices?",
+    "expected_target": "mutual TLS",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "All microservice traffic must enforce zero-trust mutual TLS with automated rotation.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_05",
+    "category": "semantic_retrieval",
+    "query": "Which machine learning technique optimizes LLM inference latency?",
+    "expected_target": "speculative decoding",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Inference acceleration is achieved by leveraging speculative decoding with draft models.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_06",
+    "category": "semantic_retrieval",
+    "query": "Who leads the incident response team during security breaches?",
+    "expected_target": "Rachel",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Rachel serves as commander for critical cybersecurity incidents and breach containment.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_07",
+    "category": "semantic_retrieval",
+    "query": "What protocol governs the distributed consensus in the storage tier?",
+    "expected_target": "Raft",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Distributed state synchronization across storage nodes relies on the Raft protocol.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_08",
+    "category": "semantic_retrieval",
+    "query": "Which compression algorithm was chosen for cold data archival?",
+    "expected_target": "Zstandard",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Historical log archives are compacted using the Zstandard compression standard level 19.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_09",
+    "category": "semantic_retrieval",
+    "query": "Who manages the developer productivity and CI platform?",
+    "expected_target": "Victor",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Victor orchestrates engineering workflow toolchains and internal developer infrastructure.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_10",
+    "category": "semantic_retrieval",
+    "query": "What mechanism protects against cascade failures in external API calls?",
+    "expected_target": "circuit breakers",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Outbound network calls to external payment vendors are guarded by automated circuit breakers.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_11",
+    "category": "semantic_retrieval",
+    "query": "Who conducted the benchmark analysis on vector indexing performance?",
+    "expected_target": "Marcus",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Marcus executed extensive empirical evaluations on HNSW graph construction and recall.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_12",
+    "category": "semantic_retrieval",
+    "query": "What strategy is used to prevent hot partitions in distributed caching?",
+    "expected_target": "consistent hashing",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Cache key distribution employs consistent hashing with virtual nodes to eliminate hot spots.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_13",
+    "category": "semantic_retrieval",
+    "query": "Who drafted the technical RFC for the streaming data ingestion pipeline?",
+    "expected_target": "Sophia",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Sophia formulated the formal design RFC for high-throughput real-time stream ingestion.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_14",
+    "category": "semantic_retrieval",
+    "query": "What metric dictates auto-scaling thresholds for the worker fleet?",
+    "expected_target": "queue depth",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Horizontal autoscaling triggers are driven by asynchronous job queue depth and lag.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_15",
+    "category": "semantic_retrieval",
+    "query": "Who is responsible for international regulatory compliance and privacy?",
+    "expected_target": "Alexander",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Alexander oversees global data sovereignty, GDPR audits, and privacy governance.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_16",
+    "category": "semantic_retrieval",
+    "query": "Which format is adopted for cross-language RPC serialization?",
+    "expected_target": "Protocol Buffers",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Internal service boundaries serialize inter-process messages using Protocol Buffers.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_17",
+    "category": "semantic_retrieval",
+    "query": "Who designed the zero-downtime database migration framework?",
+    "expected_target": "Leila",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Leila engineered the expandable-contract schema evolution framework for continuous uptime.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_18",
+    "category": "semantic_retrieval",
+    "query": "What caching topology provides local low-latency reads for edge nodes?",
+    "expected_target": "read-through replica",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Edge regions utilize an in-memory read-through replica cache backed by invalidation webhooks.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_19",
+    "category": "semantic_retrieval",
+    "query": "Who conducts threat modeling for cloud infrastructure security?",
+    "expected_target": "Nathan",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Nathan performs automated vulnerability scans and adversarial threat simulations on Kubernetes.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sem_20",
+    "category": "semantic_retrieval",
+    "query": "What method ensures deterministic builds across developer environments?",
+    "expected_target": "Hermetic containers",
+    "invalid_outdated_target": null,
+    "valid_at": null,
+    "facts_to_seed": [
+      {
+        "content": "Hermetic containers with pinned SHA-256 toolchain digests guarantee reproducible artifacts.",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_01",
+    "category": "historical_temporal",
+    "query": "Where did Sarah work in June 2023?",
+    "expected_target": "Solaris",
+    "invalid_outdated_target": "Horizon",
+    "valid_at": "2023-06-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Sarah works at Solaris as of 2022-01-01",
+        "valid_from": "2022-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Sarah left Solaris and joined Horizon in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_02",
+    "category": "historical_temporal",
+    "query": "Where did Sarah work in March 2024?",
+    "expected_target": "Horizon",
+    "invalid_outdated_target": "Solaris",
+    "valid_at": "2024-01-01T12:00:00Z",
     "facts_to_seed": []
   },
   {
-    "id": "q3_multihop_graph",
-    "query": "What project is Alice connected to through Globex in 2024?",
-    "valid_at": "2024-08-15T00:00:00Z",
-    "expected_target": "Project Titan",
+    "id": "hist_03",
+    "category": "historical_temporal",
+    "query": "Where was Carlos employed in August 2022?",
+    "expected_target": "Datadog",
+    "invalid_outdated_target": "Cloudflare",
+    "valid_at": "2022-08-01T00:00:00Z",
     "facts_to_seed": [
       {
-        "content": "Globex created Project Titan in 2024-05-01",
-        "valid_from": "2024-05-01T00:00:00Z"
+        "content": "Carlos works at Datadog as of 2021-03-01",
+        "valid_from": "2021-03-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Carlos left Datadog and joined Cloudflare in 2023-09-01",
+        "valid_from": "2023-09-01T00:00:00Z",
+        "confidence": 1.0
       }
     ]
   },
   {
-    "id": "q4_contradiction_resolution",
-    "query": "Where is Bob located?",
-    "valid_at": "2024-07-01T00:00:00Z",
-    "expected_target": "Tokyo",
+    "id": "hist_04",
+    "category": "historical_temporal",
+    "query": "Where was Carlos employed in December 2023?",
+    "expected_target": "Cloudflare",
+    "invalid_outdated_target": "Datadog",
+    "valid_at": "2023-09-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "hist_05",
+    "category": "historical_temporal",
+    "query": "Where did Maya live in March 2023?",
+    "expected_target": "Berlin",
+    "invalid_outdated_target": "Singapore",
+    "valid_at": "2023-03-01T00:00:00Z",
     "facts_to_seed": [
       {
-        "content": "Unverified rumor claims Bob lives in Kyoto in 2024-07-01",
-        "valid_from": "2024-07-01T00:00:00Z",
+        "content": "Maya works at Berlin as of 2022-05-01",
+        "valid_from": "2022-05-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Maya left Berlin and joined Singapore in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_06",
+    "category": "historical_temporal",
+    "query": "Where did Maya live in May 2024?",
+    "expected_target": "Singapore",
+    "invalid_outdated_target": "Berlin",
+    "valid_at": "2024-02-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "hist_07",
+    "category": "historical_temporal",
+    "query": "Where was Julian working in April 2022?",
+    "expected_target": "Stripe",
+    "invalid_outdated_target": "OpenAI",
+    "valid_at": "2022-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Julian works at Stripe as of 2020-01-01",
+        "valid_from": "2020-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Julian left Stripe and joined OpenAI in 2023-11-01",
+        "valid_from": "2023-11-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_08",
+    "category": "historical_temporal",
+    "query": "Where was Julian working in January 2024?",
+    "expected_target": "OpenAI",
+    "invalid_outdated_target": "Stripe",
+    "valid_at": "2023-11-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "hist_09",
+    "category": "historical_temporal",
+    "query": "Where was Fiona located in October 2022?",
+    "expected_target": "Seattle",
+    "invalid_outdated_target": "London",
+    "valid_at": "2022-10-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Fiona works at Seattle as of 2021-06-01",
+        "valid_from": "2021-06-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Fiona left Seattle and joined London in 2023-07-01",
+        "valid_from": "2023-07-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_10",
+    "category": "historical_temporal",
+    "query": "Where was Fiona located in November 2023?",
+    "expected_target": "London",
+    "invalid_outdated_target": "Seattle",
+    "valid_at": "2023-07-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "hist_11",
+    "category": "historical_temporal",
+    "query": "Where did Liam work in July 2023?",
+    "expected_target": "Anthropic",
+    "invalid_outdated_target": "DeepMind",
+    "valid_at": "2023-07-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Liam works at Anthropic as of 2022-02-01",
+        "valid_from": "2022-02-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Liam left Anthropic and joined DeepMind in 2024-04-01",
+        "valid_from": "2024-04-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_12",
+    "category": "historical_temporal",
+    "query": "Where did Liam work in May 2024?",
+    "expected_target": "DeepMind",
+    "invalid_outdated_target": "Anthropic",
+    "valid_at": "2024-04-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "hist_13",
+    "category": "historical_temporal",
+    "query": "Where was Hannah living in January 2022?",
+    "expected_target": "Boston",
+    "invalid_outdated_target": "Austin",
+    "valid_at": "2022-01-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Hannah works at Boston as of 2020-09-01",
+        "valid_from": "2020-09-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Hannah left Boston and joined Austin in 2023-01-01",
+        "valid_from": "2023-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_14",
+    "category": "historical_temporal",
+    "query": "Where was Hannah living in June 2023?",
+    "expected_target": "Austin",
+    "invalid_outdated_target": "Boston",
+    "valid_at": "2023-01-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "hist_15",
+    "category": "historical_temporal",
+    "query": "Where was Kevin employed in November 2022?",
+    "expected_target": "Snowflake",
+    "invalid_outdated_target": "Figma",
+    "valid_at": "2022-11-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Kevin works at Snowflake as of 2021-08-01",
+        "valid_from": "2021-08-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Kevin left Snowflake and joined Figma in 2023-10-01",
+        "valid_from": "2023-10-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_16",
+    "category": "historical_temporal",
+    "query": "Where was Kevin employed in December 2023?",
+    "expected_target": "Figma",
+    "invalid_outdated_target": "Snowflake",
+    "valid_at": "2023-10-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "hist_17",
+    "category": "historical_temporal",
+    "query": "Where did Zoe reside in May 2023?",
+    "expected_target": "Toronto",
+    "invalid_outdated_target": "Vancouver",
+    "valid_at": "2023-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Zoe works at Toronto as of 2021-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Zoe left Toronto and joined Vancouver in 2024-03-01",
+        "valid_from": "2024-03-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_18",
+    "category": "historical_temporal",
+    "query": "Where did Zoe reside in April 2024?",
+    "expected_target": "Vancouver",
+    "invalid_outdated_target": "Toronto",
+    "valid_at": "2024-03-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "hist_19",
+    "category": "historical_temporal",
+    "query": "Where did Ethan work in September 2022?",
+    "expected_target": "Microsoft",
+    "invalid_outdated_target": "Apple",
+    "valid_at": "2022-09-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Ethan works at Microsoft as of 2020-06-01",
+        "valid_from": "2020-06-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Ethan left Microsoft and joined Apple in 2023-08-01",
+        "valid_from": "2023-08-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "hist_20",
+    "category": "historical_temporal",
+    "query": "Where did Ethan work in September 2023?",
+    "expected_target": "Apple",
+    "invalid_outdated_target": "Microsoft",
+    "valid_at": "2023-08-01T12:00:00Z",
+    "facts_to_seed": []
+  },
+  {
+    "id": "contra_01",
+    "category": "fact_updates_contradictions",
+    "query": "What is the status of Project Valkyrie?",
+    "expected_target": "Series B",
+    "invalid_outdated_target": "cancelled",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Unverified rumor claims Project Valkyrie was cancelled by leadership in 2024-03-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.2
+      },
+      {
+        "content": "Official board announcement verifies Project Valkyrie received Series B expansion funding in 2024-03-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_02",
+    "category": "fact_updates_contradictions",
+    "query": "Where is the headquarters of NovaTech located?",
+    "expected_target": "Stockholm",
+    "invalid_outdated_target": "Oslo",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Blog post speculates NovaTech relocated to Oslo in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
         "confidence": 0.3
       },
       {
-        "content": "Official passport record confirms Bob relocated to Tokyo in 2024-07-01",
-        "valid_from": "2024-07-01T00:00:00Z",
+        "content": "Corporate registry legally confirms NovaTech headquarters is located in Stockholm in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
         "confidence": 0.98
       }
     ]
   },
   {
-    "id": "q5_knowledge_history",
-    "query": "What tool does Team Alpha adopt?",
-    "valid_at": "2024-09-01T00:00:00Z",
-    "expected_target": "PostgreSQL",
+    "id": "contra_03",
+    "category": "fact_updates_contradictions",
+    "query": "What is the maximum certified cluster node capacity?",
+    "expected_target": "1024 nodes",
+    "invalid_outdated_target": "128 nodes",
+    "valid_at": "2024-04-01T00:00:00Z",
     "facts_to_seed": [
       {
-        "content": "Team Alpha adopted PostgreSQL for temporal storage in 2024-09-01",
-        "valid_from": "2024-09-01T00:00:00Z"
+        "content": "Preliminary draft notes maximum cluster size is 128 nodes in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.35
+      },
+      {
+        "content": "Verified benchmark certification establishes maximum cluster size is 1024 nodes in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_04",
+    "category": "fact_updates_contradictions",
+    "query": "Who is the lead architect of the Quantum Engine?",
+    "expected_target": "Dr. Aris",
+    "invalid_outdated_target": "Dr. Vance",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Unconfirmed forum post mentions Dr. Vance leads the Quantum Engine in 2024-04-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.25
+      },
+      {
+        "content": "Engineering organization charter confirms Dr. Aris is the lead architect of Quantum Engine in 2024-04-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.97
+      }
+    ]
+  },
+  {
+    "id": "contra_05",
+    "category": "fact_updates_contradictions",
+    "query": "What encryption standard protects user tokens?",
+    "expected_target": "AES-256-GCM",
+    "invalid_outdated_target": "DES",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Outdated tutorial claims user tokens use DES encryption in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.15
+      },
+      {
+        "content": "Security audit report certifies user tokens are protected with AES-256-GCM in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_06",
+    "category": "fact_updates_contradictions",
+    "query": "What is the SLA availability commitment for Enterprise tier?",
+    "expected_target": "99.99%",
+    "invalid_outdated_target": "95.0%",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Customer support ticket erroneously mentions 95.0% SLA in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.25
+      },
+      {
+        "content": "Master service agreement legally guarantees 99.99% availability SLA in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_07",
+    "category": "fact_updates_contradictions",
+    "query": "Who was elected Chairman of the Technical Advisory Board?",
+    "expected_target": "Professor Thorne",
+    "invalid_outdated_target": "Dr. Bailey",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Social media speculation named Dr. Bailey Chairman in 2024-03-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.3
+      },
+      {
+        "content": "Formal press release announces Professor Thorne was elected Chairman in 2024-03-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.98
+      }
+    ]
+  },
+  {
+    "id": "contra_08",
+    "category": "fact_updates_contradictions",
+    "query": "What primary programming language powers the high-speed gateway?",
+    "expected_target": "Rust",
+    "invalid_outdated_target": "PHP",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Informal chat comment guessed gateway is written in PHP in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.1
+      },
+      {
+        "content": "Engineering repository manifest confirms gateway core is implemented in Rust in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_09",
+    "category": "fact_updates_contradictions",
+    "query": "What is the designated disaster recovery RPO target?",
+    "expected_target": "5 minutes",
+    "invalid_outdated_target": "24 hours",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Outdated wiki page states disaster recovery RPO is 24 hours in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.2
+      },
+      {
+        "content": "Disaster recovery policy dictates verified RPO threshold is 5 minutes in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.98
+      }
+    ]
+  },
+  {
+    "id": "contra_10",
+    "category": "fact_updates_contradictions",
+    "query": "Which cloud provider hosts the primary European production workloads?",
+    "expected_target": "AWS Frankfurt",
+    "invalid_outdated_target": "DigitalOcean",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Discussion thread assumed European workloads run on DigitalOcean in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.2
+      },
+      {
+        "content": "Infrastructure billing ledger confirms European workloads reside in AWS Frankfurt in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_11",
+    "category": "fact_updates_contradictions",
+    "query": "What is the memory limit allocated per serverless function instance?",
+    "expected_target": "2048 MB",
+    "invalid_outdated_target": "256 MB",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Old staging documentation listed 256 MB per function in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.3
+      },
+      {
+        "content": "Production deployment configuration allocates 2048 MB per serverless instance in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_12",
+    "category": "fact_updates_contradictions",
+    "query": "Who authored the foundational whitepaper on Chronos Protocol?",
+    "expected_target": "Dr. Elizabeth Vance",
+    "invalid_outdated_target": "Anonymous",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Gossip bulletin credited an Anonymous collective for Chronos in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.15
+      },
+      {
+        "content": "IEEE publication explicitly records Dr. Elizabeth Vance authored Chronos Protocol in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_13",
+    "category": "fact_updates_contradictions",
+    "query": "What is the official retention duration for compliance audit logs?",
+    "expected_target": "7 years",
+    "invalid_outdated_target": "30 days",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Support note mistakenly suggested 30 days retention for audit logs in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.2
+      },
+      {
+        "content": "Compliance regulatory mandate requires audit logs retention for 7 years in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_14",
+    "category": "fact_updates_contradictions",
+    "query": "What protocol is utilized for inter-cluster data replication?",
+    "expected_target": "gRPC stream",
+    "invalid_outdated_target": "FTP",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Draft memo casually suggested using FTP for inter-cluster transfer in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.1
+      },
+      {
+        "content": "Architecture review board approved gRPC stream for inter-cluster replication in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.98
+      }
+    ]
+  },
+  {
+    "id": "contra_15",
+    "category": "fact_updates_contradictions",
+    "query": "Who serves as the designated Data Protection Officer?",
+    "expected_target": "Claire Moreau",
+    "invalid_outdated_target": "John Doe",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Placeholder mockup listed John Doe as Data Protection Officer in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.1
+      },
+      {
+        "content": "Official legal filing appoints Claire Moreau as corporate Data Protection Officer in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_16",
+    "category": "fact_updates_contradictions",
+    "query": "What is the benchmark throughput achieved by the parsing engine?",
+    "expected_target": "250,000 events/sec",
+    "invalid_outdated_target": "1,000 events/sec",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Staging prototype achieved 1,000 events/sec in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.3
+      },
+      {
+        "content": "Validated production stress test certifies throughput of 250,000 events/sec in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.98
+      }
+    ]
+  },
+  {
+    "id": "contra_17",
+    "category": "fact_updates_contradictions",
+    "query": "What authentication standard is enforced for external developers?",
+    "expected_target": "OAuth2 with PKCE",
+    "invalid_outdated_target": "HTTP Basic",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Legacy API sample used HTTP Basic auth in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.2
+      },
+      {
+        "content": "API security guidelines enforce OAuth2 with PKCE for all developer integrations in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_18",
+    "category": "fact_updates_contradictions",
+    "query": "Which organization awarded the 2024 AI Infrastructure Excellence prize?",
+    "expected_target": "ACM SIGOPS",
+    "invalid_outdated_target": "Local Gazette",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Casual newsletter claimed Local Gazette awarded the prize in 2024-04-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.25
+      },
+      {
+        "content": "Official ceremony announcement confirms ACM SIGOPS awarded the 2024 Excellence prize in 2024-04-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_19",
+    "category": "fact_updates_contradictions",
+    "query": "What is the default isolation level in the relational transaction manager?",
+    "expected_target": "Serializable",
+    "invalid_outdated_target": "Read Uncommitted",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Debugging note suggested Read Uncommitted for performance in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.2
+      },
+      {
+        "content": "Database core specification enforces Serializable transaction isolation in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "contra_20",
+    "category": "fact_updates_contradictions",
+    "query": "Who is the principal maintainer of the open-source client SDK?",
+    "expected_target": "Yuki Tanaka",
+    "invalid_outdated_target": "External Vendor",
+    "valid_at": "2024-04-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Third-party post claimed an External Vendor maintains the SDK in 2024-03-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.25
+      },
+      {
+        "content": "GitHub repository governance formally designates Yuki Tanaka as principal SDK maintainer in 2024-03-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 0.99
+      }
+    ]
+  },
+  {
+    "id": "multi_01",
+    "category": "multihop_graph",
+    "query": "What project is managed by the leader of Team Phoenix?",
+    "expected_target": "Project Aegis",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Marcus leads Team Phoenix in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Team Phoenix created Project Aegis in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_02",
+    "category": "multihop_graph",
+    "query": "In what city is the parent company of Lumina Studio located?",
+    "expected_target": "Zurich",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Lumina Studio works at MediaGiant Corp in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "MediaGiant Corp located in Zurich in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_03",
+    "category": "multihop_graph",
+    "query": "Which tool is maintained by the author of the Vector Paper?",
+    "expected_target": "FastEmbed",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Dr. Chen created Vector Paper in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Vector Paper uses FastEmbed in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_04",
+    "category": "multihop_graph",
+    "query": "What operating system runs on the cluster founded by Alan?",
+    "expected_target": "Alpine Linux",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Alan built Cluster Omega in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Cluster Omega adopted Alpine Linux in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_05",
+    "category": "multihop_graph",
+    "query": "Who is the advisor of the student who joined DeepMind?",
+    "expected_target": "Professor Wu",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Alice works at DeepMind in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Professor Wu collaborates with Alice in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_06",
+    "category": "multihop_graph",
+    "query": "What database powers the platform owned by Helios Labs?",
+    "expected_target": "PostgreSQL",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Helios Labs created Aurora Platform in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Aurora Platform uses PostgreSQL in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_07",
+    "category": "multihop_graph",
+    "query": "Which framework is used by the system designed by Brenda?",
+    "expected_target": "PyTorch",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Brenda built VisionNet in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "VisionNet adopted PyTorch in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_08",
+    "category": "multihop_graph",
+    "query": "What city hosts the subsidiary founded by Liam?",
+    "expected_target": "Kyoto",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Liam founded Studio Kaze in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Studio Kaze located in Kyoto in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_09",
+    "category": "multihop_graph",
+    "query": "Who manages the division that created the Chronos Engine?",
+    "expected_target": "Director Vance",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Director Vance works at Division Nine in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Division Nine created Chronos Engine in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_10",
+    "category": "multihop_graph",
+    "query": "What language is used in the benchmark tool created by Samuel?",
+    "expected_target": "Rust",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Samuel built BenchCore in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "BenchCore adopted Rust in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_11",
+    "category": "multihop_graph",
+    "query": "Where is the research facility created by Dr. Aris located?",
+    "expected_target": "Geneva",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Dr. Aris founded CERN Lab in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "CERN Lab located in Geneva in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_12",
+    "category": "multihop_graph",
+    "query": "What caching technology is adopted by the gateway owned by Apex?",
+    "expected_target": "Redis",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Apex owns Gateway Pro in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Gateway Pro uses Redis in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_13",
+    "category": "multihop_graph",
+    "query": "Who is the mentor of the engineer who created TensorMesh?",
+    "expected_target": "Dr. Thorne",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Kai created TensorMesh in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Dr. Thorne collaborates with Kai in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_14",
+    "category": "multihop_graph",
+    "query": "What standard is enforced by the consortium joined by NovaTech?",
+    "expected_target": "ISO-27001",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "NovaTech joined Security Alliance in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Security Alliance adopted ISO-27001 in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_15",
+    "category": "multihop_graph",
+    "query": "Which cloud region hosts the storage service built by Elena?",
+    "expected_target": "us-east-1",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Elena built ObjectStore in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "ObjectStore located in us-east-1 in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_16",
+    "category": "multihop_graph",
+    "query": "What message broker is integrated into the event bus created by Clara?",
+    "expected_target": "Apache Kafka",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Clara created EventPipeline in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "EventPipeline uses Apache Kafka in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_17",
+    "category": "multihop_graph",
+    "query": "In what headquarters city does the founder of Project Titan work?",
+    "expected_target": "Tokyo",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Kenji created Project Titan in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Kenji located in Tokyo in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_18",
+    "category": "multihop_graph",
+    "query": "Which neural network architecture is leveraged by the bot designed by Omar?",
+    "expected_target": "Transformer",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Omar built SynthBot in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "SynthBot uses Transformer in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_19",
+    "category": "multihop_graph",
+    "query": "Who is the partner of the executive who leads Falcon Ventures?",
+    "expected_target": "Diana Prince",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Bruce Wayne works at Falcon Ventures in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Bruce Wayne collaborates with Diana Prince in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "multi_20",
+    "category": "multihop_graph",
+    "query": "What serialization format is utilized by the telemetry daemon built by Isaac?",
+    "expected_target": "FlatBuffers",
+    "invalid_outdated_target": null,
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Isaac built Telemetry Daemon in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Telemetry Daemon adopted FlatBuffers in 2024-02-01",
+        "valid_from": "2024-02-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_01",
+    "category": "outdated_vs_current",
+    "query": "What is the current primary database host?",
+    "expected_target": "aurora-cluster-main",
+    "invalid_outdated_target": "db-primary-01",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Primary database host is db-primary-01 as of 2022-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Primary database host was migrated to aurora-cluster-main in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_02",
+    "category": "outdated_vs_current",
+    "query": "What port does the production API gateway listen on?",
+    "expected_target": "443",
+    "invalid_outdated_target": "8080",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Production API gateway listens on port 8080 as of 2021-06-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Production API gateway listens on port 443 with TLS termination in 2023-12-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_03",
+    "category": "outdated_vs_current",
+    "query": "Who is the current Head of Engineering at Apex Systems?",
+    "expected_target": "Victoria Zhao",
+    "invalid_outdated_target": "Robert Miller",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Robert Miller is the Head of Engineering at Apex Systems in 2021-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Victoria Zhao joined Apex Systems as Head of Engineering in 2024-01-15",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_04",
+    "category": "outdated_vs_current",
+    "query": "What is the active default branch for the core repository?",
+    "expected_target": "main",
+    "invalid_outdated_target": "master",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "The default repository branch was master in 2020-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "The default repository branch is main in 2023-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_05",
+    "category": "outdated_vs_current",
+    "query": "What is the current rate limit per minute on public API keys?",
+    "expected_target": "1000 requests",
+    "invalid_outdated_target": "60 requests",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Public API rate limit was set to 60 requests in 2021-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Public API rate limit was upgraded to 1000 requests in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_06",
+    "category": "outdated_vs_current",
+    "query": "What Python version is mandated in production runtime environments?",
+    "expected_target": "Python 3.11",
+    "invalid_outdated_target": "Python 3.8",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Production runtime requires Python 3.8 as of 2020-05-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Production runtime mandates Python 3.11 in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_07",
+    "category": "outdated_vs_current",
+    "query": "Where is the corporate finance office currently located?",
+    "expected_target": "New York",
+    "invalid_outdated_target": "Chicago",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Corporate finance office was located in Chicago in 2021-03-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Corporate finance office relocated to New York in 2023-11-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_08",
+    "category": "outdated_vs_current",
+    "query": "What is the active consensus protocol used by the ledger?",
+    "expected_target": "BFT-Raft",
+    "invalid_outdated_target": "Proof of Work",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Ledger protocol used Proof of Work in 2020-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Ledger protocol transitioned to BFT-Raft in 2023-10-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_09",
+    "category": "outdated_vs_current",
+    "query": "Who is the current on-call lead for the Storage Squad?",
+    "expected_target": "Darius Stone",
+    "invalid_outdated_target": "Emma Watson",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Emma Watson was on-call lead for the Storage Squad in 2022-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Darius Stone is on-call lead for the Storage Squad in 2024-03-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_10",
+    "category": "outdated_vs_current",
+    "query": "What container registry is currently used for deployment images?",
+    "expected_target": "GitHub Packages",
+    "invalid_outdated_target": "DockerHub",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Deployment images were hosted on DockerHub in 2021-04-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Deployment images are hosted on GitHub Packages in 2023-08-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_11",
+    "category": "outdated_vs_current",
+    "query": "What is the current maximum payload size for webhook ingestion?",
+    "expected_target": "10 MB",
+    "invalid_outdated_target": "1 MB",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Webhook ingestion payload limit was 1 MB in 2021-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Webhook ingestion payload limit was raised to 10 MB in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_12",
+    "category": "outdated_vs_current",
+    "query": "Who is the active Chief Security Officer?",
+    "expected_target": "Miranda Bell",
+    "invalid_outdated_target": "Gregory House",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Gregory House served as Chief Security Officer in 2020-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Miranda Bell was appointed Chief Security Officer in 2023-09-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_13",
+    "category": "outdated_vs_current",
+    "query": "What vector indexing algorithm is currently active in production?",
+    "expected_target": "HNSW",
+    "invalid_outdated_target": "IVFFlat",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Vector search index used IVFFlat in 2022-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Vector search index was replaced by HNSW in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_14",
+    "category": "outdated_vs_current",
+    "query": "What TLS version is mandated for all ingress connections?",
+    "expected_target": "TLS 1.3",
+    "invalid_outdated_target": "TLS 1.1",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Ingress connections allowed TLS 1.1 in 2019-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Ingress connections strictly require TLS 1.3 in 2023-07-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_15",
+    "category": "outdated_vs_current",
+    "query": "Where does the central documentation site currently live?",
+    "expected_target": "docs.mnemos.io",
+    "invalid_outdated_target": "wiki.internal",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Central documentation site was wiki.internal in 2020-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Central documentation site migrated to docs.mnemos.io in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_16",
+    "category": "outdated_vs_current",
+    "query": "What is the current memory allocation per API pod?",
+    "expected_target": "4 GB",
+    "invalid_outdated_target": "512 MB",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "API pod memory allocation was 512 MB in 2021-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "API pod memory allocation is 4 GB in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_17",
+    "category": "outdated_vs_current",
+    "query": "Who is currently directing the AI Research Initiative?",
+    "expected_target": "Dr. Lucas Frost",
+    "invalid_outdated_target": "Dr. Simon Gray",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Dr. Simon Gray was directing AI Research in 2021-05-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Dr. Lucas Frost is directing AI Research in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_18",
+    "category": "outdated_vs_current",
+    "query": "What authentication protocol protects internal admin dashboards?",
+    "expected_target": "Okta SAML SSO",
+    "invalid_outdated_target": "Basic Auth",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Internal admin dashboard used Basic Auth in 2020-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Internal admin dashboard enforces Okta SAML SSO in 2023-11-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_19",
+    "category": "outdated_vs_current",
+    "query": "What is the current log retention window in Elasticsearch?",
+    "expected_target": "90 days",
+    "invalid_outdated_target": "7 days",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Elasticsearch log retention was 7 days in 2021-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Elasticsearch log retention was extended to 90 days in 2024-01-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
+      }
+    ]
+  },
+  {
+    "id": "curr_20",
+    "category": "outdated_vs_current",
+    "query": "Who is the active product manager for the Developer Console?",
+    "expected_target": "Nadia Perez",
+    "invalid_outdated_target": "Tom Clark",
+    "valid_at": "2024-05-01T00:00:00Z",
+    "facts_to_seed": [
+      {
+        "content": "Tom Clark was product manager for Developer Console in 2022-01-01",
+        "valid_from": "2021-01-01T00:00:00Z",
+        "confidence": 1.0
+      },
+      {
+        "content": "Nadia Perez is product manager for Developer Console in 2024-02-01",
+        "valid_from": "2024-01-01T00:00:00Z",
+        "confidence": 1.0
       }
     ]
   }

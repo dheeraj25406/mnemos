@@ -1,60 +1,325 @@
 {
-  "timestamp": "2026-11-13T03:47:01.114673+00:00",
+  "timestamp": "2026-11-13T04:25:45.670852+00:00",
   "os": "Darwin",
   "machine": "arm64",
   "python_version": "3.11.14",
-  "total_memories": 6,
-  "ingestion_throughput_tps": 20.31,
+  "total_queries": 100,
+  "total_memories_seeded": 160,
+  "ingestion_throughput_tps": 60.03,
+  "categories": [
+    "semantic_retrieval",
+    "historical_temporal",
+    "fact_updates_contradictions",
+    "multihop_graph",
+    "outdated_vs_current"
+  ],
   "baselines": [
     {
       "baseline": "keyword_only",
+      "queries_evaluated": 100,
+      "recall@1": 0.02,
+      "recall@5": 0.03,
+      "mrr": 0.025,
+      "temporal_accuracy": 0.02,
+      "latency_p50_ms": 1.65,
+      "latency_p95_ms": 2.82,
+      "latency_p99_ms": 3.74
+    },
+    {
+      "baseline": "vector_only",
+      "queries_evaluated": 100,
+      "recall@1": 0.57,
+      "recall@5": 0.87,
+      "mrr": 0.7083,
+      "temporal_accuracy": 0.47,
+      "latency_p50_ms": 6.06,
+      "latency_p95_ms": 7.66,
+      "latency_p99_ms": 8.27
+    },
+    {
+      "baseline": "graph_only",
+      "queries_evaluated": 100,
+      "recall@1": 0.1,
+      "recall@5": 0.33,
+      "mrr": 0.2125,
+      "temporal_accuracy": 0.1,
+      "latency_p50_ms": 1.19,
+      "latency_p95_ms": 3.25,
+      "latency_p99_ms": 4.11
+    },
+    {
+      "baseline": "hybrid_no_temporal",
+      "queries_evaluated": 100,
+      "recall@1": 0.57,
+      "recall@5": 0.89,
+      "mrr": 0.7225,
+      "temporal_accuracy": 0.47,
+      "latency_p50_ms": 11.06,
+      "latency_p95_ms": 15.08,
+      "latency_p99_ms": 52.05
+    },
+    {
+      "baseline": "full_mnemos",
+      "queries_evaluated": 100,
+      "recall@1": 0.57,
+      "recall@5": 0.89,
+      "mrr": 0.7225,
+      "temporal_accuracy": 0.49,
+      "latency_p50_ms": 11.58,
+      "latency_p95_ms": 14.72,
+      "latency_p99_ms": 15.76
+    }
+  ],
+  "category_breakdown": [
+    {
+      "baseline": "keyword_only",
+      "category": "semantic_retrieval",
+      "queries": 20,
       "recall@1": 0.0,
       "recall@5": 0.0,
       "mrr": 0.0,
       "temporal_accuracy": 0.0,
-      "latency_p50_ms": 0.85,
-      "latency_p95_ms": 2.69,
-      "latency_p99_ms": 2.98
+      "latency_p50_ms": 2.42
+    },
+    {
+      "baseline": "keyword_only",
+      "category": "historical_temporal",
+      "queries": 20,
+      "recall@1": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "temporal_accuracy": 0.0,
+      "latency_p50_ms": 1.57
+    },
+    {
+      "baseline": "keyword_only",
+      "category": "fact_updates_contradictions",
+      "queries": 20,
+      "recall@1": 0.1,
+      "recall@5": 0.1,
+      "mrr": 0.1,
+      "temporal_accuracy": 0.1,
+      "latency_p50_ms": 1.62
+    },
+    {
+      "baseline": "keyword_only",
+      "category": "multihop_graph",
+      "queries": 20,
+      "recall@1": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "temporal_accuracy": 0.0,
+      "latency_p50_ms": 1.64
+    },
+    {
+      "baseline": "keyword_only",
+      "category": "outdated_vs_current",
+      "queries": 20,
+      "recall@1": 0.0,
+      "recall@5": 0.05,
+      "mrr": 0.025,
+      "temporal_accuracy": 0.0,
+      "latency_p50_ms": 1.61
     },
     {
       "baseline": "vector_only",
-      "recall@1": 0.4,
-      "recall@5": 0.8,
-      "mrr": 0.6,
-      "temporal_accuracy": 0.4,
-      "latency_p50_ms": 5.85,
-      "latency_p95_ms": 7.0,
-      "latency_p99_ms": 7.03
+      "category": "semantic_retrieval",
+      "queries": 20,
+      "recall@1": 0.8,
+      "recall@5": 0.9,
+      "mrr": 0.85,
+      "temporal_accuracy": 0.8,
+      "latency_p50_ms": 6.22
     },
     {
-      "baseline": "hybrid_no_temporal",
-      "recall@1": 0.4,
-      "recall@5": 0.8,
-      "mrr": 0.6,
+      "baseline": "vector_only",
+      "category": "historical_temporal",
+      "queries": 20,
+      "recall@1": 0.9,
+      "recall@5": 1.0,
+      "mrr": 0.95,
       "temporal_accuracy": 0.4,
-      "latency_p50_ms": 5.0,
-      "latency_p95_ms": 6.12,
-      "latency_p99_ms": 6.18
+      "latency_p50_ms": 5.28
+    },
+    {
+      "baseline": "vector_only",
+      "category": "fact_updates_contradictions",
+      "queries": 20,
+      "recall@1": 0.8,
+      "recall@5": 0.95,
+      "mrr": 0.8667,
+      "temporal_accuracy": 0.8,
+      "latency_p50_ms": 6.01
+    },
+    {
+      "baseline": "vector_only",
+      "category": "multihop_graph",
+      "queries": 20,
+      "recall@1": 0.05,
+      "recall@5": 0.5,
+      "mrr": 0.2333,
+      "temporal_accuracy": 0.05,
+      "latency_p50_ms": 6.38
+    },
+    {
+      "baseline": "vector_only",
+      "category": "outdated_vs_current",
+      "queries": 20,
+      "recall@1": 0.3,
+      "recall@5": 1.0,
+      "mrr": 0.6417,
+      "temporal_accuracy": 0.3,
+      "latency_p50_ms": 6.6
     },
     {
       "baseline": "graph_only",
-      "recall@1": 0.4,
+      "category": "semantic_retrieval",
+      "queries": 20,
+      "recall@1": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "temporal_accuracy": 0.0,
+      "latency_p50_ms": 0.57
+    },
+    {
+      "baseline": "graph_only",
+      "category": "historical_temporal",
+      "queries": 20,
+      "recall@1": 0.5,
+      "recall@5": 1.0,
+      "mrr": 0.75,
+      "temporal_accuracy": 0.5,
+      "latency_p50_ms": 1.55
+    },
+    {
+      "baseline": "graph_only",
+      "category": "fact_updates_contradictions",
+      "queries": 20,
+      "recall@1": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0,
+      "temporal_accuracy": 0.0,
+      "latency_p50_ms": 0.85
+    },
+    {
+      "baseline": "graph_only",
+      "category": "multihop_graph",
+      "queries": 20,
+      "recall@1": 0.0,
       "recall@5": 0.6,
-      "mrr": 0.5,
+      "mrr": 0.2875,
+      "temporal_accuracy": 0.0,
+      "latency_p50_ms": 1.25
+    },
+    {
+      "baseline": "graph_only",
+      "category": "outdated_vs_current",
+      "queries": 20,
+      "recall@1": 0.0,
+      "recall@5": 0.05,
+      "mrr": 0.025,
+      "temporal_accuracy": 0.0,
+      "latency_p50_ms": 0.65
+    },
+    {
+      "baseline": "hybrid_no_temporal",
+      "category": "semantic_retrieval",
+      "queries": 20,
+      "recall@1": 0.8,
+      "recall@5": 0.9,
+      "mrr": 0.85,
+      "temporal_accuracy": 0.8,
+      "latency_p50_ms": 10.01
+    },
+    {
+      "baseline": "hybrid_no_temporal",
+      "category": "historical_temporal",
+      "queries": 20,
+      "recall@1": 0.9,
+      "recall@5": 1.0,
+      "mrr": 0.95,
+      "temporal_accuracy": 0.4,
+      "latency_p50_ms": 11.24
+    },
+    {
+      "baseline": "hybrid_no_temporal",
+      "category": "fact_updates_contradictions",
+      "queries": 20,
+      "recall@1": 0.8,
+      "recall@5": 0.95,
+      "mrr": 0.8667,
+      "temporal_accuracy": 0.8,
+      "latency_p50_ms": 11.02
+    },
+    {
+      "baseline": "hybrid_no_temporal",
+      "category": "multihop_graph",
+      "queries": 20,
+      "recall@1": 0.05,
+      "recall@5": 0.6,
+      "mrr": 0.3042,
+      "temporal_accuracy": 0.05,
+      "latency_p50_ms": 12.36
+    },
+    {
+      "baseline": "hybrid_no_temporal",
+      "category": "outdated_vs_current",
+      "queries": 20,
+      "recall@1": 0.3,
+      "recall@5": 1.0,
+      "mrr": 0.6417,
       "temporal_accuracy": 0.3,
-      "latency_p50_ms": 3.13,
-      "latency_p95_ms": 10.4,
-      "latency_p99_ms": 11.83
+      "latency_p50_ms": 9.39
     },
     {
       "baseline": "full_mnemos",
-      "recall@1": 0.6,
+      "category": "semantic_retrieval",
+      "queries": 20,
+      "recall@1": 0.8,
+      "recall@5": 0.9,
+      "mrr": 0.85,
+      "temporal_accuracy": 0.8,
+      "latency_p50_ms": 9.62
+    },
+    {
+      "baseline": "full_mnemos",
+      "category": "historical_temporal",
+      "queries": 20,
+      "recall@1": 0.9,
       "recall@5": 1.0,
-      "mrr": 0.8,
-      "temporal_accuracy": 0.6,
-      "latency_p50_ms": 7.71,
-      "latency_p95_ms": 10.53,
-      "latency_p99_ms": 10.93
+      "mrr": 0.95,
+      "temporal_accuracy": 0.5,
+      "latency_p50_ms": 10.84
+    },
+    {
+      "baseline": "full_mnemos",
+      "category": "fact_updates_contradictions",
+      "queries": 20,
+      "recall@1": 0.8,
+      "recall@5": 0.95,
+      "mrr": 0.8667,
+      "temporal_accuracy": 0.8,
+      "latency_p50_ms": 12.4
+    },
+    {
+      "baseline": "full_mnemos",
+      "category": "multihop_graph",
+      "queries": 20,
+      "recall@1": 0.05,
+      "recall@5": 0.6,
+      "mrr": 0.3042,
+      "temporal_accuracy": 0.05,
+      "latency_p50_ms": 12.78
+    },
+    {
+      "baseline": "full_mnemos",
+      "category": "outdated_vs_current",
+      "queries": 20,
+      "recall@1": 0.3,
+      "recall@5": 1.0,
+      "mrr": 0.6417,
+      "temporal_accuracy": 0.3,
+      "latency_p50_ms": 12.12
     }
   ]
 }
