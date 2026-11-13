@@ -1,0 +1,90 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: mnemos-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-mnemos}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mnemos_dev_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-mnemos}
+    ports:
+      - "${POSTGRES_PORT:-5435}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init-extensions.sql:/docker-entrypoint-initdb.d/01-init-extensions.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-mnemos} -d ${POSTGRES_DB:-mnemos}"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+    networks:
+      - mnemos-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: mnemos-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6380}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    networks:
+      - mnemos-net
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: mnemos-api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - ENVIRONMENT=production
+      - DATABASE_URL=postgresql+asyncpg://mnemos:mnemos_dev_secret@postgres:5432/mnemos
+      - SYNC_DATABASE_URL=postgresql+psycopg://mnemos:mnemos_dev_secret@postgres:5432/mnemos
+      - REDIS_URL=redis://redis:6379/0
+      - MNEMOS_PORT=8000
+      - MNEMOS_HOST=0.0.0.0
+      - MNEMOS_DEFAULT_TENANT_KEY=mnk_live_default_secret_key_12345
+      - EMBEDDING_PROVIDER=fastembed
+      - LOG_LEVEL=INFO
+    ports:
+      - "${MNEMOS_PORT:-8088}:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mnemos-net
+
+  console:
+    build:
+      context: ./console
+      dockerfile: ../docker/Dockerfile.console
+    container_name: mnemos-console
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "${CONSOLE_PORT:-3001}:3000"
+    networks:
+      - mnemos-net
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  mnemos-net:
+    driver: bridge
